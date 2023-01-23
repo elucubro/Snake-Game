@@ -8,6 +8,23 @@ let speed = 20;
 let lastPaintTime = 0;
 let snakeArray = [{x: 13, y: 15}]
 let food = {x: 6, y: 7};
+let counter: number = 0;
+let highCounter: number = 0;
+//high score / score set up
+const scoreContainer = document.createElement("div")
+scoreContainer.classList.add("scoreContainer")
+const score = document.createElement("div")
+score.classList.add("score")
+const highScore = document.createElement("div")
+highScore.classList.add("highScore")
+score.textContent = 'Score: 0'
+highScore.textContent = 'High score: 0'
+scoreContainer.appendChild(score)
+scoreContainer.appendChild(highScore)
+document.body.appendChild(scoreContainer)
+
+
+
 // Game Functions
 function main(ctime: any) {
     window.requestAnimationFrame(main)
@@ -29,6 +46,8 @@ function collide(snake: Array<any>){
     return false;
 }
 function gameEngine(){
+    //0
+
     // 1
     //collision handler
     if(collide(snakeArray)){
@@ -36,6 +55,12 @@ function gameEngine(){
         direction = {x:0,y:0}
         alert("Game Over, Better Luck Next Time! (ctrl + r to replay)");
         snakeArray = [{x: 13,y:15}]
+        if(counter > highCounter){
+            highCounter = counter
+            highScore.textContent = 'High score: '+ highCounter.toString()
+            score.textContent = 'Score: 0'
+            counter = 0
+        }
     }
     // food regen
     if(snakeArray[0].y === food.y && snakeArray[0].x === food.x){
@@ -43,6 +68,8 @@ function gameEngine(){
         snakeArray.unshift({x: snakeArray[0].x + direction.x, y: snakeArray[0].y + direction.y});
         let a = 2, b = 16;
         food = {x: Math.round(a + (b-a)*Math.random()),y: Math.round(a + (b-a)*Math.random())};
+        counter++
+        score.textContent = 'Score: ' + counter.toString()
     }
 
     //Snake Movement
