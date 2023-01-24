@@ -110,21 +110,25 @@ window.addEventListener('keydown',
     e => {
         direction = {x: 0,y: 0}
         switch (e.key) {
+            case "w":
             case "ArrowUp":
                 console.log("arrow up");
                 direction.x = 0;
                 direction.y = -1;
                 break;
+            case "s":
             case "ArrowDown":
                 console.log("arrow Down")
                 direction.x = 0;
                 direction.y = 1;
                 break;
+            case "a":
             case "ArrowLeft":
                 console.log("arrow left");
                 direction.x = -1;
                 direction.y = 0;
                 break;
+            case "d":
             case "ArrowRight":
                 console.log("arrow right");
                 direction.x = 1;
